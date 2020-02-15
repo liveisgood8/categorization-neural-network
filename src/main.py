@@ -1,5 +1,5 @@
 from src.core.parser.csv_dataset_parser import parse as csv_data_parse
-from src.core.splitters.split_dict import spit as split_dataset
+from src.core.preparers.split_dict import spit as split_dataset
 
 num_classes = 65
 
