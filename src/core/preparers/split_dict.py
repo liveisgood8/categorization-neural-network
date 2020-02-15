@@ -1,7 +1,8 @@
-from typing import Dict
+import numpy as np
+from typing import Dict, List
 
 
-def spit(data_set_dict: Dict[int, list], train_size: int) -> (Dict[int, list], Dict[int, list]):
+def spit(data_set_dict: Dict[int, List[np.ndarray]], train_size: int) -> (Dict[int, list], Dict[int, list]):
     train_data_set = {}
     test_data_set = {}
 
