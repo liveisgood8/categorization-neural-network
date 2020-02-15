@@ -1,7 +1,8 @@
 import tensorflow as tf
 
+
 # Enable memory growth
-def load():
+def load() -> None:
     gpus = tf.config.experimental.list_physical_devices('GPU')
     if gpus:
       try:

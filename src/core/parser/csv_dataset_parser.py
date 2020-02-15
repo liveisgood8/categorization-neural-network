@@ -1,8 +1,9 @@
 import csv
 import numpy as np
+from typing import Dict
 
 
-def parse(path: str, num_classes: int):
+def parse(path: str, num_classes: int) -> Dict[int, list]:
     with open(path, newline='\n') as csv_file:
         data_set = prepare_dataset_dict(num_classes)
         data_reader = csv.reader(csv_file, delimiter=',')
@@ -22,7 +23,7 @@ def parse(path: str, num_classes: int):
     return data_set
 
 
-def prepare_dataset_dict(num_classes: int):
+def prepare_dataset_dict(num_classes: int) -> Dict[int, list]:
     data_set_dict = {}
     for i in range(0, num_classes + 1):
         data_set_dict[i] = []

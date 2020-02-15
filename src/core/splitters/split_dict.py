@@ -1,7 +1,7 @@
 from typing import Dict
 
 
-def spit(data_set_dict: Dict[int, list], train_size: int):
+def spit(data_set_dict: Dict[int, list], train_size: int) -> (Dict[int, list], Dict[int, list]):
     train_data_set = {}
     test_data_set = {}
 
