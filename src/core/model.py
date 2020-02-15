@@ -15,7 +15,7 @@ def make_cnn_model(img_width: int, img_height: int, num_classes: int, input_shap
     model.add(Flatten())
     model.add(Dense(128, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(Dense(num_classes + 1, activation='softmax'))
+    model.add(Dense(num_classes, activation='softmax'))
 
     model.compile(loss=keras.losses.categorical_crossentropy,
                   optimizer=keras.optimizers.Adadelta(),

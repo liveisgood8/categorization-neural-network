@@ -7,7 +7,7 @@ from src.core.preparers.dict_set_to_learn_set import convert as convert_to_learn
 from src.core.model import make_cnn_model
 from src.core.loaders import tf_loader
 
-num_classes = 65
+num_classes = 66
 batch_size = 128
 epochs = 2
 data_set_file_path = '/home/nexus/HMCC balanced.csv'

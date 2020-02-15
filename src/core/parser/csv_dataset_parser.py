@@ -27,7 +27,7 @@ def parse(path: str, num_classes: int) -> Dict[int, List[np.ndarray]]:
 
 def prepare_data_set_dict(num_classes: int) -> Dict[int, list]:
     data_set_dict = {}
-    for i in range(0, num_classes + 1):
+    for i in range(0, num_classes):
         data_set_dict[i] = []
     return data_set_dict
 
