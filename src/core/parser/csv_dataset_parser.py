@@ -2,9 +2,9 @@ import csv
 import numpy as np
 
 
-def parse(path: str):
+def parse(path: str, num_classes: int):
     with open(path, newline='\n') as csv_file:
-        data_set = prepare_dataset_dict()
+        data_set = prepare_dataset_dict(num_classes)
         data_reader = csv.reader(csv_file, delimiter=',')
         i = 0
         for row in data_reader:
@@ -22,9 +22,9 @@ def parse(path: str):
     return data_set
 
 
-def prepare_dataset_dict():
+def prepare_dataset_dict(num_classes: int):
     data_set_dict = {}
-    for i in range(0, 66):
+    for i in range(0, num_classes + 1):
         data_set_dict[i] = []
     return data_set_dict
 
