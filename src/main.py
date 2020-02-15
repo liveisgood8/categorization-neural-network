@@ -5,11 +5,12 @@ from src.core.parser.csv_dataset_parser import parse as csv_data_parse
 from src.core.preparers.split_dict import spit as split_dataset
 from src.core.preparers.dict_set_to_learn_set import convert as convert_to_learn_set
 from src.core.model import make_cnn_model
+from src.core.model import save_model
 from src.core.loaders import tf_loader
 
 num_classes = 66
 batch_size = 128
-epochs = 2
+epochs = 12
 data_set_file_path = '/home/nexus/HMCC balanced.csv'
 # data_set_file_path = '/media/Shared/Учеба/МКурс1_Семестр2/МашинноеОбучение/datasets/' \
 #                      'handwritten-mongolian-cyrillic-characters-database/HMCC balanced.csv'
@@ -36,6 +37,8 @@ model.fit(x_train, y_train,
           epochs=epochs,
           verbose=1,
           validation_data=(x_test, y_test))
+
+save_model(model)
 
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
