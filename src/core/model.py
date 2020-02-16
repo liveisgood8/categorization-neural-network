@@ -49,4 +49,7 @@ def load_model() -> Sequential:
         loaded_model_json = json_file.read()
     loaded_model = model_from_json(loaded_model_json)
     loaded_model.load_weights(MODEL_WEIGHTS_FILENAME)
+    loaded_model.compile(loss=keras.losses.categorical_crossentropy,
+                          optimizer=keras.optimizers.Adadelta(),
+                          metrics=['accuracy'])
     return loaded_model
