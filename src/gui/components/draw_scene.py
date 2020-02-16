@@ -20,21 +20,19 @@ class DrawScene(QtWidgets.QGraphicsScene):
     def mousePressEvent(self, event: QtWidgets.QGraphicsSceneMouseEvent):
         if event.button() == Qt.MidButton:
             self.clear()
-        else:
+        elif event.button() == Qt.LeftButton:
             self.addEllipse(event.scenePos().x() - self.LINE_RADIUS_PX, event.scenePos().y() - self.LINE_RADIUS_PX,
                             self.LINE_RADIUS_PX * 2, self.LINE_RADIUS_PX * 2,
                             QPen(Qt.NoPen),
                             QBrush(Qt.black))
             self.previousPoint = event.scenePos()
-            event.ignore()
 
     def mouseMoveEvent(self, event: QtWidgets.QGraphicsSceneMouseEvent):
         self.addEllipse(event.scenePos().x() - self.LINE_RADIUS_PX, event.scenePos().y() - self.LINE_RADIUS_PX,
                         self.LINE_RADIUS_PX * 2, self.LINE_RADIUS_PX * 2,
                         QPen(Qt.black, self.LINE_RADIUS_PX * 2, Qt.SolidLine))
         self.previousPoint = event.scenePos()
-        event.ignore()
 
     def mouseReleaseEvent(self, event: QtWidgets.QGraphicsSceneMouseEvent):
-        if event.button() != Qt.MidButton:
+        if event.button() == Qt.RightButton:
             self.communication.doneDrawing.emit()

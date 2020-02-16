@@ -4,11 +4,15 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QPixmap, QImage, qGray
 from .components.draw_scene import DrawScene
+from src.core.model import load_model
+from src.core.labels.russian_hmcc_dict import letter_from_label
 
 
 class MainWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+
+        self.model = load_model()
 
         content_layout = QtWidgets.QVBoxLayout()
         self.setLayout(content_layout)
@@ -44,4 +48,11 @@ class MainWidget(QtWidgets.QWidget):
         grab_rect.setHeight(grab_rect.height() - 1)
         pixmap: QPixmap = self.graphics_view.grab(grab_rect)
         pixmap = pixmap.scaled(config.IMG_WIDTH, config.IMG_HEIGHT, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-        print(self.pixmap_into_gray_matrix(pixmap))
+
+        pixmap_matrix = self.pixmap_into_gray_matrix(pixmap)
+        pixmap_matrix = np.reshape(pixmap_matrix, newshape=(1, config.IMG_WIDTH, config.IMG_HEIGHT, 1))
+        pixmap_matrix /= 255
+        prediction = self.model.predict(pixmap_matrix)
+
+        letter_class_label = np.argmax(prediction, axis=None, out=None)
+        self.set_letter(letter_from_label(letter_class_label))
