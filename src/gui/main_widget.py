@@ -37,7 +37,7 @@ class MainWidget(QtWidgets.QWidget):
         image: QImage = pixmap.toImage()
         for i in range(pixmap.width()):
             for j in range(pixmap.height()):
-                matrix[i][j] = 255 - qGray(image.pixel(i, j))
+                matrix[j][i] = 255 - qGray(image.pixel(i, j))
         return matrix
 
     def on_drawing_done(self):
@@ -55,4 +55,5 @@ class MainWidget(QtWidgets.QWidget):
         prediction = self.model.predict(pixmap_matrix)
 
         letter_class_label = np.argmax(prediction, axis=None, out=None)
-        self.set_letter(letter_from_label(letter_class_label))
+        print('Predicated class: ', letter_class_label)
+        self.set_letter(chr(ord('A') + letter_class_label - 1))
