@@ -1,6 +1,7 @@
 import csv
 import numpy as np
 from typing import Dict, List
+from PyQt5.QtGui import QImage, QColor
 
 import src.core.config as config
 
@@ -30,4 +31,14 @@ def prepare_data_set_dict(num_classes: int) -> Dict[int, list]:
     for i in range(0, num_classes):
         data_set_dict[i] = []
     return data_set_dict
+
+
+def dump_image(matrix: np.ndarray, number: int) -> None:
+    image = QImage(28, 28, QImage.Format_RGB32)
+    for i in range(0, matrix.shape[0]):
+        for j in range(0, matrix.shape[1]):
+            grayscale = matrix[i][j]
+            image.setPixelColor(i, j, QColor(grayscale, grayscale, grayscale))
+    image.save('dump/img' + str(number) + '.png')
+
 
