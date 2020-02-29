@@ -1,12 +1,13 @@
 import keras
 import src.core.config as config
 
+from keras.utils import plot_model
 from keras.models import Sequential, model_from_json
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
 
-def make_cnn_model(img_width: int, img_height: int, num_classes: int, input_shape: tuple) -> Sequential:
+def make_cnn_model(num_classes: int, input_shape: tuple) -> Sequential:
     model = Sequential()
     model.add(Conv2D(32, kernel_size=(3, 3),
                      activation='relu',
@@ -26,6 +27,10 @@ def make_cnn_model(img_width: int, img_height: int, num_classes: int, input_shap
     return model
 
 
+def plot_model_to_file(model: Sequential) -> None:
+    plot_model(model, to_file=config.MODEL_PLOT_PNG_FILENAME, show_shapes=True)
+
+
 def save_model_weights(model: Sequential) -> None:
     model.save_weights(config.MODEL_WEIGHTS_FILENAME)
 
@@ -36,10 +41,11 @@ def load_model_weights(model: Sequential) -> Sequential:
 
 
 def save_model(model: Sequential) -> None:
+    save_model_weights(model)
+    plot_model_to_file(model)
     model_json = model.to_json()
     with open(config.MODEL_JSON_FILENAME, 'w') as json_file:
         json_file.write(model_json)
-        save_model_weights(model)
 
 
 def load_model() -> Sequential:

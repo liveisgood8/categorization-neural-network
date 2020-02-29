@@ -15,7 +15,7 @@ from src.core.loaders import tf_loader
 
 num_classes = 27
 batch_size = 128
-epochs = 8
+epochs = 10
 
 
 def train_and_save_mode(show_history=False):
@@ -47,7 +47,7 @@ def train_and_save_mode(show_history=False):
     print('Test input shape:', x_test.shape)
     print('Test output shape:', y_test.shape)
 
-    model = make_cnn_model(config.IMG_WIDTH, config.IMG_HEIGHT, num_classes, input_shape)
+    model = make_cnn_model(num_classes, input_shape)
     history = model.fit(x_train, y_train,
                         batch_size=batch_size,
                         epochs=epochs,
@@ -68,6 +68,7 @@ def train_and_save_mode(show_history=False):
         plt.ylabel('accuracy')
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper left')
+        plt.grid()
         plt.show()
         # summarize history for loss
         plt.plot(history.history['loss'])
@@ -76,6 +77,7 @@ def train_and_save_mode(show_history=False):
         plt.ylabel('loss')
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper left')
+        plt.grid()
         plt.show()
 
 
@@ -84,7 +86,8 @@ def main():
     if '--train' in sys.argv:
         show_history = '--train-history' in sys.argv
         train_and_save_mode(show_history)
-    start_application()
+    else:
+        start_application()
 
 
 if __name__ == '__main__':

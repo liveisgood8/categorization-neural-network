@@ -5,7 +5,6 @@ from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QPixmap, QImage, qGray
 from .components.draw_scene import DrawScene
 from src.core.model import load_model
-from src.core.labels.russian_hmcc_dict import letter_from_label
 
 
 class MainWidget(QtWidgets.QWidget):
@@ -32,7 +31,8 @@ class MainWidget(QtWidgets.QWidget):
     def set_letter(self, letter: str):
         self.letter_label.setText('Нарисованная буква: ' + letter)
 
-    def pixmap_into_gray_matrix(self, pixmap: QPixmap) -> np.ndarray:
+    @staticmethod
+    def pixmap_into_gray_matrix(pixmap: QPixmap) -> np.ndarray:
         matrix = np.empty(shape=(config.IMG_WIDTH, config.IMG_HEIGHT))
         image: QImage = pixmap.toImage()
         for i in range(pixmap.width()):
