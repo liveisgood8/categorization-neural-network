@@ -1,2 +1,2 @@
 # categorization-neural-network
-CNN for classification images
+CNN for english letters classification 
