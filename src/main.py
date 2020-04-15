@@ -61,7 +61,6 @@ def train_and_save_mode(show_history=False):
     print('Test accuracy:', score[1])
 
     if show_history:
-        # summarize history for accuracy
         plt.plot(history.history['accuracy'])
         plt.plot(history.history['val_accuracy'])
         plt.title('Model accuracy')
@@ -70,7 +69,7 @@ def train_and_save_mode(show_history=False):
         plt.legend(['train', 'test'], loc='upper left')
         plt.grid()
         plt.show()
-        # summarize history for loss
+
         plt.plot(history.history['loss'])
         plt.plot(history.history['val_loss'])
         plt.title('Model loss')
